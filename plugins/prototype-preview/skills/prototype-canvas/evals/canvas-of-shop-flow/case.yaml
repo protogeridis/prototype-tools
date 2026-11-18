@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: canvas-of-shop-flow
+expected_outcome: |
+  /preview has a Prototype/Canvas switch; the canvas shows Home, Product, Checkout review and Order placed as live frames joined by labelled arrows; clicking one opens the prototype there with working back/close; typecheck passes.
+context:
+  scaffold_script: place-files.sh

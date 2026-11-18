@@ -1,0 +1,19 @@
+{
+  "name": "prototype-preview",
+  "version": "0.2.0",
+  "description": "Prototype previews for React Native (Expo Router) and Next.js apps: the live app in a device frame or at chosen viewport sizes, a settings panel (language, scenarios, flow variants) that applies live, and a canvas board of every step of the flow.",
+  "author": {
+    "name": "Filippos"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "expo-router",
+    "nextjs",
+    "react",
+    "prototype",
+    "preview",
+    "i18n",
+    "canvas"
+  ]
+}

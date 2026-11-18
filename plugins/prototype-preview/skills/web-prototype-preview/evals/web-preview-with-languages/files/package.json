@@ -1,0 +1,7 @@
+{
+  "name": "corner-shop-web",
+  "private": true,
+  "scripts": { "dev": "next dev", "build": "next build", "lint": "eslint ." },
+  "dependencies": { "next": "16.4.1", "react": "19.3.0", "react-dom": "19.3.0" },
+  "devDependencies": { "typescript": "^5", "@types/react": "^19", "@types/node": "^20" }
+}

@@ -1,0 +1,447 @@
+/* The preview's own chrome. Kept apart from the app's styles (CSS Modules, its own font stack and
+   colours) so it looks the same in any project; change --pp-accent and --pp-link to match the brand. */
+
+.root {
+  --pp-page: #e8eae6;
+  --pp-surface: #ffffff;
+  --pp-text: #0e0f0c;
+  --pp-text-secondary: #454745;
+  --pp-text-tertiary: #6a6c6a;
+  --pp-border: rgba(14, 15, 12, 0.12);
+  --pp-hover: rgba(14, 15, 12, 0.05);
+  --pp-track: rgba(14, 15, 12, 0.06);
+  --pp-accent: #9fe870;
+  --pp-on-accent: #163300;
+  --pp-link: #163300;
+  --pp-font: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Covers the whole window, so any app chrome in the root layout stays out of sight. */
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: flex;
+  background: var(--pp-page);
+  color: var(--pp-text);
+  font-family: var(--pp-font);
+  font-size: 14px;
+  line-height: 22px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root button,
+.root select {
+  font: inherit;
+  color: inherit;
+}
+
+.narrow {
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Stage: the app (or the canvas) with a floating toolbar. */
+
+.stage {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.narrow .stage {
+  flex: none;
+  height: max(85vh, 480px);
+}
+
+.toolbar {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.toolbar > * {
+  pointer-events: auto;
+}
+
+/* Centred in the space beside the viewport picker, so the two never overlap. */
+.viewSwitch {
+  width: 200px;
+  margin: 0 auto;
+}
+
+.frameStage {
+  position: absolute;
+  inset: 72px 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.hidden {
+  display: none;
+}
+
+.frame {
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--pp-surface);
+  box-shadow: 0 24px 60px rgba(14, 15, 12, 0.18), 0 0 0 1px rgba(14, 15, 12, 0.1);
+}
+
+.frameScaled {
+  transform-origin: top left;
+}
+
+.frame iframe {
+  display: block;
+  border: 0;
+}
+
+.caption {
+  color: var(--pp-text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Side panel. */
+
+.panelCard {
+  flex: none;
+  width: 360px;
+  margin: 16px 16px 16px 0;
+  border-radius: 24px;
+  overflow-y: auto;
+  background: var(--pp-surface);
+  box-shadow: 0 12px 40px rgba(14, 15, 12, 0.1), 0 2px 6px rgba(14, 15, 12, 0.06);
+}
+
+.narrow .panelCard {
+  width: auto;
+  margin: 0 16px 16px;
+  overflow: visible;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+}
+
+.panelTitle {
+  margin: 0;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: -0.33px;
+}
+
+.panelSubtitle {
+  margin: 4px 0 0;
+  color: var(--pp-text-secondary);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 0 -8px;
+}
+
+.textButton {
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 100px;
+  background: none;
+  color: var(--pp-link) !important;
+  font-weight: 600 !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.textButton:hover {
+  background: var(--pp-hover);
+}
+
+.divider {
+  height: 1px;
+  background: var(--pp-border);
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.labelRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.groupTitle {
+  font-weight: 600;
+}
+
+.groupCaption {
+  font-size: 12px;
+  color: var(--pp-text-tertiary);
+}
+
+.description {
+  margin: 0;
+  font-size: 13px;
+  line-height: 19px;
+  color: var(--pp-text-secondary);
+}
+
+/* Controls. */
+
+.segmented {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 12px;
+  background: var(--pp-track);
+}
+
+.segment {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 9px;
+  background: none;
+  color: var(--pp-text-secondary) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.segment:hover {
+  background: var(--pp-hover);
+}
+
+.segment[aria-checked='true'] {
+  background: var(--pp-surface);
+  color: var(--pp-text) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 3px rgba(14, 15, 12, 0.12), 0 1px 1px rgba(14, 15, 12, 0.04);
+}
+
+.select {
+  appearance: none;
+  width: 100%;
+  height: 40px;
+  padding: 0 36px 0 12px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--pp-surface)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'%3E%3Cpath d='M3.5 6l4.5 4.5L12.5 6' stroke='%230E0F0C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    no-repeat right 12px center;
+  box-shadow: inset 0 0 0 1px rgba(14, 15, 12, 0.16);
+  font-weight: 600 !important;
+  cursor: pointer;
+}
+
+.select:hover {
+  background-color: #f6f7f5;
+}
+
+.pill {
+  width: auto;
+  padding-left: 18px;
+  border-radius: 100px;
+  box-shadow: 0 1px 2px rgba(14, 15, 12, 0.08), inset 0 0 0 1px rgba(14, 15, 12, 0.12);
+}
+
+.segment:focus-visible,
+.select:focus-visible,
+.textButton:focus-visible,
+.iconButton:focus-visible {
+  outline: 2px solid var(--pp-link);
+  outline-offset: 2px;
+}
+
+/* Canvas (used by the canvas view, when installed). */
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  background-image: radial-gradient(circle, rgba(14, 15, 12, 0.14) 1px, transparent 1.2px);
+}
+
+.world {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+}
+
+.node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.node:hover {
+  background: var(--pp-hover);
+}
+
+.nodeCurrent {
+  border-color: var(--pp-accent);
+}
+
+.nodeFrame {
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--pp-surface);
+  box-shadow: 0 10px 30px rgba(14, 15, 12, 0.14), 0 0 0 1px rgba(14, 15, 12, 0.1);
+}
+
+.nodeFrame iframe {
+  display: block;
+  border: 0;
+  pointer-events: none;
+}
+
+.nodeLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 20px;
+  font-weight: 600;
+}
+
+.nodeTitle {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge {
+  padding: 0 8px;
+  border-radius: 10px;
+  background: var(--pp-accent);
+  color: var(--pp-on-accent);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.action {
+  position: absolute;
+  max-width: 168px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: var(--pp-surface);
+  box-shadow: inset 0 0 0 1px rgba(14, 15, 12, 0.12);
+  color: var(--pp-text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.canvasControls {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.zoomControls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 14px;
+  background: var(--pp-surface);
+  box-shadow: 0 4px 16px rgba(14, 15, 12, 0.1), 0 1px 3px rgba(14, 15, 12, 0.06);
+}
+
+.iconButton {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+}
+
+.iconButton:hover {
+  background: rgba(14, 15, 12, 0.06);
+}
+
+.zoomValue {
+  min-width: 44px;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.controlDivider {
+  width: 1px;
+  height: 20px;
+  margin: 0 2px;
+  background: var(--pp-border);
+}
+
+.hint {
+  padding: 4px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--pp-text-secondary);
+  font-size: 13px;
+}

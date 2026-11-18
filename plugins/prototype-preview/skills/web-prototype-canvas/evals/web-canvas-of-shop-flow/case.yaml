@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: web-canvas-of-shop-flow
+expected_outcome: |
+  /preview (or a similar page) shows Home, Product, Checkout and Order placed as live renders joined by labelled arrows; clicking one opens the live prototype there; typecheck passes.
+context:
+  scaffold_script: place-files.sh

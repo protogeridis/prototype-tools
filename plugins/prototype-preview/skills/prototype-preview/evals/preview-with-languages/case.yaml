@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: preview-with-languages
+expected_outcome: |
+  A /preview web page shows the live app in a phone frame with a right-hand panel; switching English/French/Spanish changes the app's copy and number formats live; typecheck passes.
+context:
+  scaffold_script: place-files.sh

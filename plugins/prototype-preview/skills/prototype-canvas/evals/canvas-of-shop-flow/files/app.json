@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Corner Shop",
+    "slug": "corner-shop",
+    "version": "1.0.0",
+    "scheme": "cornershop",
+    "userInterfaceStyle": "light",
+    "plugins": ["expo-router"],
+    "experiments": { "typedRoutes": false }
+  }
+}

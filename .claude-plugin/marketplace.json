@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "prototype-tools",
+  "description": "Team tools for prototyping React Native and Next.js apps",
+  "owner": {
+    "name": "Filippos"
+  },
+  "plugins": [
+    {
+      "name": "prototype-preview",
+      "description": "Prototype previews for React Native (Expo Router) and Next.js apps: the live app in a device frame or at chosen viewport sizes, a settings panel (language, scenarios, flow variants) that applies live, and a canvas board of every step of the flow.",
+      "source": "./plugins/prototype-preview",
+      "category": "development"
+    }
+  ]
+}
